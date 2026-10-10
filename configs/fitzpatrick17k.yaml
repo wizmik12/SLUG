@@ -1,0 +1,31 @@
+# Fitzpatrick17k skin-tone bias study — base config.
+# Consumed only by src/run_study.py, which flattens this into main.py CLI flags
+# per (run, subset, variant) subprocess call. main.py itself stays flag-based.
+
+dataset: fitz
+dataset_root: /work/work_mik/2026Diff_UQ/FitzFairness/data/images/   # trailing slash required (data.py does dataset_root + "../fitzpatrick17k.csv")
+
+# Architecture / training hyperparameters — from CVAE-jax/README.md's documented
+# repro command: -ks 0.5 --latent_channels 128 -bs 64 -fs 0 --image_size 128
+image_size: 128
+ch_multi: 64
+block_widths: [1, 2, 4, 8]
+num_res_blocks: 1
+latent_channels: 128
+batch_size: 64
+nepoch: 1000
+lr: 1.0e-4
+kl_scale: 0.5
+feature_scale: 0
+
+# Dataset A/B/C sizing (paper protocol: fixed size, resampled WITH replacement)
+train_size: 1668
+test_size: 512
+# SLUG scoring (500 Hutchinson samples/image) is memory-hungry: batch_size_uq=16
+# OOMs on a 24GB GPU, batch_size_uq=64 (matching training batch_size) OOMs harder.
+# 8 is the largest confirmed-working value on this hardware -- expect SLUG eval
+# to be slow (~2.9h per 512-image test group at this batch size), not stuck.
+batch_size_uq: 8
+
+# External validation (PASSION) — not available on this machine; leave null to skip.
+passion_root: null
