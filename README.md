@@ -20,7 +20,7 @@ it from needing the full parameter-space matrix.
 
 This score is not computed during training, but post-hoc.
 
-## Read this before you trust any number you get
+## Read this before running it
 
 On the GPU and cuDNN we used, XLA's convolution autotuner picks a numerically broken algorithm
 depending on the batch size. There is no error and no warning. 
