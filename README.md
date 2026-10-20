@@ -168,6 +168,8 @@ Point `dataset_root` in the configs at your copy.
 
 ## Citation
 
+Manuscript under revision at *Medical Image Analysis*. 
+
 ```bibtex
 @article{lopezperez2026bayesian,
   title   = {Bayesian generative models can flag performance loss and bias in medical imaging},
