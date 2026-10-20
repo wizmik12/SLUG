@@ -173,7 +173,6 @@ Point `dataset_root` in the configs at your copy.
   title   = {Bayesian generative models can flag performance loss and bias in medical imaging},
   author  = {L\'opez-P\'erez, Miguel and Miani, Marco and Naranjo, Valery
              and Hauberg, S{\o}ren and Feragen, Aasa},
-  journal = {Medical Image Analysis},
   year    = {2026}
 }
 ```
