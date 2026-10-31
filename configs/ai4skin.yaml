@@ -1,0 +1,31 @@
+# AI4SkIN histopathology imaging-center bias study — base config.
+# Consumed only by src/run_study.py, which flattens this into main.py CLI flags
+# per (run, subset, variant) subprocess call. main.py itself stays flag-based.
+#
+# Architecture/training hyperparameters mirror the Fitzpatrick17k config (the
+# paper doesn't state AI4SkIN-specific values, and uses the same VAE architecture
+# for both experiments) — only dataset/sizing differ.
+
+dataset: ai4skin
+ai4skin_patches_csv: /work/work_mik/2026Diff_UQ/FusoFairness/data/metadata/patches.csv
+ai4skin_patches_root: /work/work_mik/2026Diff_UQ/FusoFairness/data/
+
+image_size: 128   # patches are 512x512, resized to 128x128 per paper protocol
+ch_multi: 64
+block_widths: [1, 2, 4, 8]
+num_res_blocks: 1
+latent_channels: 128
+batch_size: 64
+nepoch: 1000
+lr: 1.0e-4
+kl_scale: 0.5
+feature_scale: 0
+
+# Dataset A/B/C sizing (paper protocol: fixed size, resampled WITH replacement)
+train_size: 2000
+test_size: 512
+# See fitzpatrick17k.yaml for why this is 8, not 64: SLUG's Hutchinson-sample
+# loop OOMs on a 24GB GPU above this batch size for this ~50M-param VAE.
+batch_size_uq: 8
+
+passion_root: null   # not applicable to AI4SkIN, kept for config-shape parity with fitzpatrick17k.yaml

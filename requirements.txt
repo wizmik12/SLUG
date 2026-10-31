@@ -1,0 +1,35 @@
+# Versions this was last run with. Nothing here is pinned because it has to be --
+# matfree is the only package whose API we depend on closely.
+#
+# Install jax first, matched to your CUDA driver:
+#   pip install -U "jax[cuda12]"
+# then the rest:
+#   pip install -r requirements.txt
+
+matfree==0.1.0
+flax==0.8.5
+optax==0.2.3
+
+numpy==2.2.6
+scipy==1.14.0
+pandas==2.2.2
+scikit-learn==1.5.1
+scikit-image==0.26.0
+matplotlib==3.9.2
+Pillow==10.2.0
+PyYAML==6.0.2
+tqdm==4.66.5
+
+# the VAE is trained with a VGG perceptual term, and LPIPS is one of the reported
+# reconstruction metrics; both come through torch
+torch==2.4.0
+torchvision==0.19.0
+lpips==0.1.4
+
+imageio==2.35.1
+wandb==0.17.8          # training logs only; set WANDB_MODE=disabled to skip it
+
+# only for the Stable Diffusion autoencoder and latent diffusion experiments.
+# these pull pretrained weights from the Hugging Face hub on first use.
+diffusers==0.31.0
+transformers==4.44.2
